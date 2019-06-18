@@ -1,2 +1,2 @@
 # Tax-Forecast
-Final project at spiced academy using machine learning to forecast German federal tax revenues
+Final project at Spiced Academy, using machine learning to forecast German federal tax revenues.
