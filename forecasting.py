@@ -77,7 +77,7 @@ def forecast(df, steps = 12):
         months_list_diff = list(months_diff.values)*11
         df['Average Rolling Change Diff'] = df['Rolling Change Diff']/months_list_diff
 
-        df_forecast1 = sarimax_forecast(df['Rolling Average Change Diff'].diff(), periods = steps)
+        df_forecast1 = sarimax_forecast(df['Rolling Average Change Diff'], periods = steps)
         diff_forecast = months_list_diff[:12]*df_forecast1.cumsum()+df['Rolling Total'].iloc[-1]
 
         df['Rolling Change %'] = df['Rolling Total'].pct_change()
@@ -85,7 +85,7 @@ def forecast(df, steps = 12):
         months_list_pct = list(months_diff.values)*11
         df['Average Rolling Change %'] = df['Rolling Change %']/months_list_pct
 
-        df_forecast2 = sarimax_forecast(df['Average Rolling Change %'].pct_change(), periods = steps)
+        df_forecast2 = sarimax_forecast(df['Average Rolling Change %'], periods = steps)
         pct_forecast = (df['Monthly Total'].iloc[-1]*(1+df_forecast2*months_list_pct[:12]).cumprod()).cumsum()
 
     category = pd.Series(df['Category'].iloc[-1], index = diff_forecast.index)
